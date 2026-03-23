@@ -13,7 +13,7 @@ public abstract class Tile {
     private static final Map<Integer, emptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
     private static Map<Integer, emptyTile> createAllPossibleEmptyTiles() {
         final Map<Integer, emptyTile> emptyTileMap = new HashMap<>();
-            for(int i = 0; i < 64; i++) {
+            for(int i = 0; i < BoardUtils.NUM_TILES; i++) {
                 emptyTileMap.put(i, new emptyTile(i));
             }
         //Collections.unmodifiableMap(emptyTileMap);
@@ -24,7 +24,7 @@ public abstract class Tile {
         return piece != null ? new OccupiedTile(tileCoordinate, piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
     } //Tạo 1 ô --> nếu như Ô đã có quân thì lấy tọa độ ô, quân cờ / Không thì lấy tọa độ ô còn trống
 
-    private Tile (int tileCoordinate) {
+    private Tile (final int tileCoordinate) {
         this.tileCoordinate = tileCoordinate;
     } //constructor
 
@@ -51,7 +51,7 @@ public abstract class Tile {
 
         private final Piece pieceOnTile;
 
-        private OccupiedTile(int tileCoordinate, Piece pieceOnTile) {
+        private OccupiedTile(int tileCoordinate, final Piece pieceOnTile) {
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }

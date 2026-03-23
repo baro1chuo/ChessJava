@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static com.chess.engine.board.Move.*;
+
 public class Knight extends Piece{
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-17, -15, -10, -6, 6, 10, 15, 17};
 
@@ -18,8 +20,9 @@ public class Knight extends Piece{
         super(piecePosition, pieceAlliance);
     }
 
+    //duyet nuoc di cua Knight
     @Override
-    public Collection<Move> calculateLegalMoves(Board board) {
+    public Collection<Move> calculateLegalMoves(final Board board) {
         //int candidateDestinationCoordinates;
         final List<Move> legalMoves = new ArrayList<>();
 
@@ -27,7 +30,7 @@ public class Knight extends Piece{
         for(final int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) { //duyệt vòng for để tìm đường đi thích hợp
             final int candidateDestinationCoordinates = this.piecePosition + currentCandidateOffset; //Điểm đến quân mã hiện tại = vị trí hiện tại của quân mã + vị trí có thể đi được {-17, -15, -10, -6, 6, 10, 15, 17}
             if(BoardUtils.isValidTile(candidateDestinationCoordinates)) {
-
+                //gioi han quan Knight di ra khoi ban co
                 if(isFirstColumnExclusion(this.piecePosition, currentCandidateOffset) ||
                         isSecondColumnExclusion(this.piecePosition, currentCandidateOffset) ||
                         isSeventhColumnExclusion(this.piecePosition, currentCandidateOffset)||
@@ -36,14 +39,14 @@ public class Knight extends Piece{
                 }
 
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinates);
-                if(candidateDestinationTile.isTileOccupied()) {
-                    legalMoves.add(new Move());
-                } else {
+                if(candidateDestinationTile.isTileOccupied()) { //nuoc di binh thuong
+                    legalMoves.add(new NormalMove(board, this, candidateDestinationCoordinates));
+                } else { //nuoc di an quan
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceAlliance =pieceAtDestination.getPieceAlliance();
 
                     if(this.pieceAlliance != pieceAlliance) {
-                        legalMoves.add(new Move());
+                        legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinates, pieceAtDestination));
                     }
                 }
             }
