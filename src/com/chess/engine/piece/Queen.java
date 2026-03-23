@@ -14,12 +14,12 @@ import java.util.List;
 public class Queen extends Piece{
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    public Queen(int piecePosition, Alliance pieceAlliance) {
+    public Queen(final int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
     @Override
-    public Collection<Move> calculateLegalMoves(Board board) {
+    public Collection<Move> calculateLegalMoves(final Board board) {
 
         final List<Move> legalMoves = new ArrayList<>();
         for (final int candidateCoordinateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {
