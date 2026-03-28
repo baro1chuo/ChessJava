@@ -23,7 +23,6 @@ public class Knight extends Piece{
     //duyet nuoc di cua Knight
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
-        //int candidateDestinationCoordinates;
         final List<Move> legalMoves = new ArrayList<>();
 
 
@@ -39,7 +38,7 @@ public class Knight extends Piece{
                 }
 
                 final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinates);
-                if(candidateDestinationTile.isTileOccupied()) { //nuoc di binh thuong
+                if(!candidateDestinationTile.isTileOccupied()) { //nuoc di binh thuong
                     legalMoves.add(new NormalMove(board, this, candidateDestinationCoordinates));
                 } else { //nuoc di an quan
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();

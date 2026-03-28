@@ -1,6 +1,5 @@
 package com.chess.engine.piece;
 
-
 import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
@@ -35,7 +34,7 @@ public class Bishop extends Piece{
                 candidateDestinationCoordinates += candidateCoordinateOffset;
                 if(BoardUtils.isValidTile(candidateDestinationCoordinates)) { //check loai nuoc di nhu the nao
                     final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinates);
-                    if(candidateDestinationTile.isTileOccupied()) { //nuoc di binh thuong
+                    if(!candidateDestinationTile.isTileOccupied()) { //nuoc di binh thuong
                         legalMoves.add(new Move.NormalMove(board, this, candidateDestinationCoordinates));
                     } else { //nuoc di an quan
                         final Piece pieceAtDestination = candidateDestinationTile.getPiece();

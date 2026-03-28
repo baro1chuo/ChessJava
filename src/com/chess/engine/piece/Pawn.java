@@ -44,7 +44,6 @@ public class Pawn extends Piece{
                 if(board.getTile(candidateDestinationCoordinate).isTileOccupied()) {
                     final Piece pieceOnCandidate = board.getTile(candidateDestinationCoordinate).getPiece();
                     if(this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
-                        //Add ham an quan
                         legalMoves.add(new Move.NormalMove(board, this, candidateDestinationCoordinate));
                     }
                 }
